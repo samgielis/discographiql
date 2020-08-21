@@ -1,5 +1,15 @@
 # DiscographiQL
 
+DiscograpiQL allows you to search for your favourite artists and browse their discography.
+
+## Dependencies
+- TypeScript
+- React
+- GraphQL, using the https://spotify-graphql-server.herokuapp.com/ endpoint to retrieve Spotify data
+- [Apollo Client React](https://www.apollographql.com/docs/react/), offering state management on top of GraphQL
+- [Chakra UI](https://chakra-ui.com/), offering modular and accessible React components
+- [Emotion](https://emotion.sh/), relied on by Chakra to provide features like styled components and themeing
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
