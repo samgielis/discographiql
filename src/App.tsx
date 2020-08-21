@@ -1,5 +1,6 @@
 import React from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { ThemeProvider, Heading, CSSReset } from "@chakra-ui/core";
 import { DummyQuery } from "./components/DummyQuery";
 
 const client = new ApolloClient({
@@ -10,8 +11,11 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <h1>DiscographiQL</h1>
-      <DummyQuery />
+      <ThemeProvider>
+        <CSSReset />
+        <Heading> DiscographiQL</Heading>
+      </ThemeProvider>
+      ;
     </ApolloProvider>
   );
 }
