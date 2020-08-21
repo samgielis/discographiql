@@ -1,7 +1,7 @@
 import React from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { ThemeProvider, Heading, CSSReset } from "@chakra-ui/core";
-import { DummyQuery } from "./components/DummyQuery";
+import { SearchBar } from "./components/SearchBar";
 
 const client = new ApolloClient({
   uri: "https://spotify-graphql-server.herokuapp.com/graphql?",
@@ -13,9 +13,9 @@ function App() {
     <ApolloProvider client={client}>
       <ThemeProvider>
         <CSSReset />
-        <Heading> DiscographiQL</Heading>
+        <Heading>DiscographiQL</Heading>
+        <SearchBar onQueryEntered={console.log} />
       </ThemeProvider>
-      ;
     </ApolloProvider>
   );
 }
