@@ -3,6 +3,7 @@ import { gql, useQuery } from "@apollo/client";
 import { Text, Spinner, SimpleGrid, Box, Heading } from "@chakra-ui/core";
 import { defaultResponsiveMargin } from "../DefaultTheme";
 import ElegantImage from "./ElegantImage";
+import { NamedNodeWithImage, NamedNode } from "../DataModel";
 
 const ARTISTS = gql`
   query Artists($partialName: String!) {
@@ -15,18 +16,18 @@ const ARTISTS = gql`
 `;
 
 interface ArtistQueryResult {
-  queryArtists: {
-    id: string;
-    name: string;
-    image: string;
-  }[];
+  queryArtists: NamedNodeWithImage[];
 }
 
 interface ArtistSearchOverviewProps {
   query: string;
+  onArtistSelected: (artist: NamedNode) => any;
 }
 
-export function ArtistSearchOverview({ query }: ArtistSearchOverviewProps) {
+export function ArtistSearchOverview({
+  query,
+  onArtistSelected,
+}: ArtistSearchOverviewProps) {
   const { loading, error, data } = useQuery<ArtistQueryResult>(ARTISTS, {
     variables: { partialName: query },
   });
@@ -48,14 +49,19 @@ export function ArtistSearchOverview({ query }: ArtistSearchOverviewProps) {
       columns={{ base: 2, sm: 3, lg: 5 }}
       spacing={defaultResponsiveMargin}
     >
-      {data.queryArtists.map(({ id, name, image }) => (
-        <Box key={id} textAlign="center">
-          <ElegantImage src={image} alt={name} ratio={1} maxW="400px" />
-          <Heading size="sm" m={defaultResponsiveMargin}>
-            {name}
-          </Heading>
-        </Box>
-      ))}
+      {data.queryArtists.map(({ id, name, image }) => {
+        const artistClickHandler = () => {
+          onArtistSelected({ id, name });
+        };
+        return (
+          <Box key={id} textAlign="center" onClick={artistClickHandler}>
+            <ElegantImage src={image} alt={name} ratio={1} maxW="400px" />
+            <Heading size="sm" m={defaultResponsiveMargin}>
+              {name}
+            </Heading>
+          </Box>
+        );
+      })}
     </SimpleGrid>
   );
 }
