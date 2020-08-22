@@ -1,8 +1,9 @@
 import React from "react";
 import { ArtistWithDiscography, NamedNodeWithImage } from "../DataModel";
-import { Box, Heading, SimpleGrid } from "@chakra-ui/core";
+import { Box, Heading, SimpleGrid, Image, Flex } from "@chakra-ui/core";
 import { defaultResponsiveMargin } from "../DefaultTheme";
 import ElegantImage from "./ElegantImage";
+import ArtistHeader from "./ArtistHeader";
 
 interface ArtistProfileProps {
   artist: ArtistWithDiscography<NamedNodeWithImage>;
@@ -10,10 +11,8 @@ interface ArtistProfileProps {
 
 export default function ArtistProfile({ artist }: ArtistProfileProps) {
   return (
-    <Box bg="gray.700">
-      <Heading size="sm" m={defaultResponsiveMargin}>
-        {artist.name}'s Discography
-      </Heading>
+    <Box minH="100vh">
+      <ArtistHeader artist={artist} />
       <SimpleGrid
         columns={{ base: 2, sm: 3, lg: 5 }}
         spacing={defaultResponsiveMargin}
