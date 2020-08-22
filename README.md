@@ -1,6 +1,6 @@
 # DiscographiQL
 
-DiscograpiQL allows you to search for your favourite artists and browse their discography.
+DiscographiQL allows you to search for your favourite artists and browse their discography.
 
 ## Dependencies
 - TypeScript
