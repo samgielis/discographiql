@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { NamedNode, ArtistWithDiscography, Artist } from "../DataModel";
 import { Spinner, Text, Box, SimpleGrid, Heading } from "@chakra-ui/core";
 import { defaultResponsiveMargin } from "../DefaultTheme";
 import ElegantImage from "./ElegantImage";
+import {
+  DEFAULT_FILTER_CONFIG,
+  FilterConfiguration,
+  filterNodes,
+} from "../FilterUtils";
 
 const ARTISTDISCOGRAPHY = gql`
   query ArtistPage($fullName: String!) {
@@ -34,6 +39,10 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
     }
   );
 
+  const [filterConfig, setFilterConfig] = useState<FilterConfiguration>(
+    DEFAULT_FILTER_CONFIG
+  );
+
   if (loading) {
     return <Spinner />;
   }
@@ -55,13 +64,18 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
     });
 
     if (artistWithDiscography) {
+      let filteredDiscography = filterNodes(
+        artistWithDiscography.albums,
+        filterConfig
+      );
+
       return (
         <SimpleGrid
           columns={{ base: 2, sm: 3, lg: 5 }}
           spacing={defaultResponsiveMargin}
           margin={defaultResponsiveMargin}
         >
-          {artistWithDiscography.albums.map(({ id, name, image }) => (
+          {filteredDiscography.map(({ id, name, image }) => (
             <Box key={id} textAlign="center">
               <ElegantImage src={image} alt={name} ratio={1} maxW="400px" />
               <Heading size="md" mx={0} my={defaultResponsiveMargin}>
