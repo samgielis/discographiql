@@ -54,7 +54,12 @@ export function ArtistSearchOverview({
           onArtistSelected(artist);
         };
         return (
-          <Box key={artist.id} textAlign="center" onClick={artistClickHandler}>
+          <Box
+            key={artist.id}
+            textAlign="center"
+            onClick={artistClickHandler}
+            cursor="pointer"
+          >
             <ElegantImage
               src={artist.image}
               alt={artist.name}
