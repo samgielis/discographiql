@@ -1,13 +1,8 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-import {
-  Image,
-  Text,
-  Spinner,
-  SimpleGrid,
-  AspectRatioBox,
-} from "@chakra-ui/core";
+import { Text, Spinner, SimpleGrid } from "@chakra-ui/core";
 import { defaultResponsiveMargin } from "../DefaultTheme";
+import ElegantImage from "./ElegantImage";
 
 const ARTISTS = gql`
   query Artists($partialName: String!) {
@@ -43,12 +38,13 @@ export function ArtistSearchOverview({ query }: ArtistSearchOverviewProps) {
   }
 
   return (
-    <SimpleGrid columns={{ base: 2, sm: 3, lg: 5 }} spacing={defaultResponsiveMargin}>
+    <SimpleGrid
+      columns={{ base: 2, sm: 3, lg: 5 }}
+      spacing={defaultResponsiveMargin}
+    >
       {data.queryArtists.map(({ id, name, image }: ArtistQueryResult) => (
         <div key={id}>
-          <AspectRatioBox maxW="400px" ratio={1}>
-            <Image src={image} alt={name} objectFit="cover" />
-          </AspectRatioBox>
+          <ElegantImage src={image} alt={name} ratio={1} maxW="400px" />
           <p>{name}</p>
         </div>
       ))}
