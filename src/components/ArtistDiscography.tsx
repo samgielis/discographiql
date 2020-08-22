@@ -41,13 +41,15 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
   if (error) {
     return (
       <Text>
-        Something went wrong fetching this artist's discography. Please try again
-        later.
+        Something went wrong fetching this artist's discography. Please try
+        again later.
       </Text>
     );
   }
 
   if (data && data.queryArtists.length > 0) {
+    /* It's not possible to query the server for an artist by id directly.
+      We need to query by name and then filter by id on the client side. */
     const artistWithDiscography = data.queryArtists.find((possibleMatch) => {
       return possibleMatch.id === artist.id;
     });
