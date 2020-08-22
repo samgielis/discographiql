@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/discographiql/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/discographiql/static/js/main.536c61f6.chunk.js",
-    "main.js.map": "/discographiql/static/js/main.536c61f6.chunk.js.map",
+    "main.js": "/discographiql/static/js/main.dc4ca9d9.chunk.js",
+    "main.js.map": "/discographiql/static/js/main.dc4ca9d9.chunk.js.map",
     "runtime-main.js": "/discographiql/static/js/runtime-main.9874f84f.js",
     "runtime-main.js.map": "/discographiql/static/js/runtime-main.9874f84f.js.map",
     "static/js/2.8387b4fe.chunk.js": "/discographiql/static/js/2.8387b4fe.chunk.js",
     "static/js/2.8387b4fe.chunk.js.map": "/discographiql/static/js/2.8387b4fe.chunk.js.map",
     "index.html": "/discographiql/index.html",
-    "precache-manifest.0ecd58d8672acd3bf73826bc075bfbc3.js": "/discographiql/precache-manifest.0ecd58d8672acd3bf73826bc075bfbc3.js",
+    "precache-manifest.e374a19d25198bcd26de77c706fe6839.js": "/discographiql/precache-manifest.e374a19d25198bcd26de77c706fe6839.js",
     "service-worker.js": "/discographiql/service-worker.js",
     "static/css/main.5ecd60fb.chunk.css.map": "/discographiql/static/css/main.5ecd60fb.chunk.css.map",
     "static/js/2.8387b4fe.chunk.js.LICENSE.txt": "/discographiql/static/js/2.8387b4fe.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.9874f84f.js",
     "static/js/2.8387b4fe.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.536c61f6.chunk.js"
+    "static/js/main.dc4ca9d9.chunk.js"
   ]
 }
