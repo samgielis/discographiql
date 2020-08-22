@@ -10,7 +10,7 @@ interface ArtistProfileProps {
 
 export default function ArtistProfile({ artist }: ArtistProfileProps) {
   return (
-    <Box>
+    <Box bg="gray.700">
       <Heading size="sm" m={defaultResponsiveMargin}>
         {artist.name}'s Discography
       </Heading>
