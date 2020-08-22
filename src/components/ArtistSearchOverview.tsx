@@ -1,6 +1,6 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-import { Text, Spinner, SimpleGrid } from "@chakra-ui/core";
+import { Text, Spinner, SimpleGrid, Box } from "@chakra-ui/core";
 import { defaultResponsiveMargin } from "../DefaultTheme";
 import ElegantImage from "./ElegantImage";
 
@@ -43,10 +43,10 @@ export function ArtistSearchOverview({ query }: ArtistSearchOverviewProps) {
       spacing={defaultResponsiveMargin}
     >
       {data.queryArtists.map(({ id, name, image }: ArtistQueryResult) => (
-        <div key={id}>
+        <Box key={id} textAlign="center">
           <ElegantImage src={image} alt={name} ratio={1} maxW="400px" />
           <p>{name}</p>
-        </div>
+        </Box>
       ))}
     </SimpleGrid>
   );
