@@ -4,10 +4,8 @@ import { ThemeProvider, Heading, CSSReset, Box } from "@chakra-ui/core";
 import { SearchBar } from "./components/SearchBar";
 import { ArtistSearchOverview } from "./components/ArtistSearchOverview";
 import { defaultResponsiveMargin } from "./DefaultTheme";
-import {
-  ArtistDiscographyOverview,
-} from "./components/ArtistDiscographyOverview";
-import { NamedNode } from "./DataModel";
+import { ArtistDiscographyOverview } from "./components/ArtistDiscographyOverview";
+import { Artist } from "./DataModel";
 
 const client = new ApolloClient({
   uri: "https://spotify-graphql-server.herokuapp.com/graphql?",
@@ -16,7 +14,7 @@ const client = new ApolloClient({
 
 function App() {
   const [query, setQuery] = useState("");
-  const [artist, setArtist] = useState<NamedNode | undefined>(undefined);
+  const [artist, setArtist] = useState<Artist | undefined>(undefined);
   const handleQueryEntered = (query: string) => {
     setArtist(undefined);
     setQuery(query);

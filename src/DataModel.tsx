@@ -8,9 +8,10 @@ export interface NamedNodeWithImage extends NamedNode {
 }
 
 export type Album = NamedNodeWithImage;
+export type Artist = NamedNodeWithImage;
 
 export type Discography = Album[];
 
-export interface ArtistWithDiscography extends NamedNode {
+export type ArtistWithDiscography<NodeType extends NamedNode> = NodeType & {
   albums: Discography;
-}
+};

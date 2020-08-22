@@ -1,9 +1,8 @@
 import React from "react";
-import { Box, Spinner, Text, SimpleGrid, Heading } from "@chakra-ui/core";
+import { Spinner, Text } from "@chakra-ui/core";
 import { gql, useQuery } from "@apollo/client";
-import { defaultResponsiveMargin } from "../DefaultTheme";
-import ElegantImage from "./ElegantImage";
-import { NamedNode, ArtistWithDiscography, Discography } from "../DataModel";
+import { NamedNode, ArtistWithDiscography, Artist } from "../DataModel";
+import ArtistProfile from "./ArtistProfile";
 
 const DISCOGRAPHY = gql`
   query Discography($fullName: String!) {
@@ -20,24 +19,11 @@ const DISCOGRAPHY = gql`
 `;
 
 interface DiscographyQueryResults {
-  queryArtists: ArtistWithDiscography[];
+  queryArtists: ArtistWithDiscography<NamedNode>[];
 }
 
 interface ArtistDiscographyOverviewProps {
-  artist: NamedNode;
-}
-
-function getMatchingArtistDiscography(
-  result: DiscographyQueryResults,
-  artistId: string
-): Discography | undefined {
-  const matchingArtist = result.queryArtists.find((artist) => {
-    return artist.id === artistId;
-  });
-
-  if (matchingArtist) {
-    return matchingArtist.albums;
-  }
+  artist: Artist;
 }
 
 export function ArtistDiscographyOverview({
@@ -59,28 +45,13 @@ export function ArtistDiscographyOverview({
   }
 
   if (data && data.queryArtists.length > 0) {
-    const discography = getMatchingArtistDiscography(data, artist.id);
-    if (discography) {
-      return (
-        <Box>
-          <Heading size="sm" m={defaultResponsiveMargin}>
-            {artist.name}'s Discography
-          </Heading>
-          <SimpleGrid
-            columns={{ base: 2, sm: 3, lg: 5 }}
-            spacing={defaultResponsiveMargin}
-          >
-            {discography.map(({ id, name, image }) => (
-              <Box key={id} textAlign="center">
-                <ElegantImage src={image} alt={name} ratio={1} maxW="400px" />
-                <Heading size="md" mx={0} my={defaultResponsiveMargin}>
-                  {name}
-                </Heading>
-              </Box>
-            ))}
-          </SimpleGrid>
-        </Box>
-      );
+    const artistWithDiscography = data.queryArtists.find((possibleMatch) => {
+      return possibleMatch.id === artist.id;
+    });
+
+    if (artistWithDiscography) {
+      let augmentedArtist = { ...artist, ...artistWithDiscography };
+      return <ArtistProfile artist={augmentedArtist} />;
     }
   }
 
