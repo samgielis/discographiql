@@ -71,7 +71,6 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
         <SimpleGrid
           columns={{ base: 2, sm: 3, lg: 5 }}
           spacing={defaultResponsiveMargin}
-          margin={defaultResponsiveMargin}
         >
           {filteredDiscography.map(({ id, name, image }) => (
             <Box key={id} textAlign="center">
@@ -87,12 +86,14 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
   }
 
   return (
-    <Box>
-      <Heading>Discography</Heading>
-      <FilterToolBar
-        config={filterConfig}
-        onFilterConfigChanged={setFilterConfig}
-      />
+    <Box textAlign="center" margin={defaultResponsiveMargin}>
+      <Box my={10}>
+        <Heading m={defaultResponsiveMargin}>Discography</Heading>
+        <FilterToolBar
+          config={filterConfig}
+          onFilterConfigChanged={setFilterConfig}
+        />
+      </Box>
       {queryVisualization}
     </Box>
   );

@@ -14,7 +14,7 @@ export default function FilterToolBar({
   return (
     <ButtonGroup spacing={4}>
       <Button
-        variantColor="teal"
+        variantColor="gray"
         size="sm"
         onClick={() =>
           onFilterConfigChanged({
@@ -26,7 +26,7 @@ export default function FilterToolBar({
         {config.sortDescending ? "Sort ascending" : "Sort descending"}
       </Button>
       <Button
-        variantColor="teal"
+        variantColor="gray"
         size="sm"
         onClick={() =>
           onFilterConfigChanged({
