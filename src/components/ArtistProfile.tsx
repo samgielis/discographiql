@@ -17,6 +17,7 @@ export default function ArtistProfile({ artist }: ArtistProfileProps) {
       <SimpleGrid
         columns={{ base: 2, sm: 3, lg: 5 }}
         spacing={defaultResponsiveMargin}
+        margin={defaultResponsiveMargin}
       >
         {artist.albums.map(({ id, name, image }) => (
           <Box key={id} textAlign="center">
