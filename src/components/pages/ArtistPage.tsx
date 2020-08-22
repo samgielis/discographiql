@@ -1,7 +1,8 @@
 import React from "react";
 import { Box, IconButton } from "@chakra-ui/core";
 import { Artist } from "../../DataModel";
-import ArtistProfile from "../ArtistProfile";
+import ArtistHeader from "../ArtistHeader";
+import ArtistDiscography from "../ArtistDiscography";
 
 interface ArtistPageProps {
   artist: Artist;
@@ -11,10 +12,9 @@ interface ArtistPageProps {
 export function ArtistPage({ artist, onNavigateBack }: ArtistPageProps) {
   return (
     <Box>
-      <Box>
-        <NavigateBackButton onNavigateBack={onNavigateBack} />
-        <ArtistProfile artist={artist} />
-      </Box>
+      <NavigateBackButton onNavigateBack={onNavigateBack} />
+      <ArtistHeader artist={artist} />
+      <ArtistDiscography artist={artist} />
     </Box>
   );
 }
