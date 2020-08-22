@@ -21,13 +21,11 @@ export function SearchPage({ showing, onArtistSelected }: SearchPageProps) {
     <Box d={showing ? "block" : "none"} m={defaultResponsiveMargin}>
       <Heading>DiscographiQL</Heading>
       <SearchBar onQueryEntered={handleQueryEntered} />
-      {!!query ? (
+      {!!query && (
         <ArtistSearchOverview
           query={query}
           onArtistSelected={onArtistSelected}
         />
-      ) : (
-        <div />
       )}
     </Box>
   );
