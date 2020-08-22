@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/discographiql/static/css/main.69eda509.chunk.css",
+    "main.js": "/discographiql/static/js/main.3d658526.chunk.js",
+    "main.js.map": "/discographiql/static/js/main.3d658526.chunk.js.map",
+    "runtime-main.js": "/discographiql/static/js/runtime-main.9874f84f.js",
+    "runtime-main.js.map": "/discographiql/static/js/runtime-main.9874f84f.js.map",
+    "static/js/2.33d1b705.chunk.js": "/discographiql/static/js/2.33d1b705.chunk.js",
+    "static/js/2.33d1b705.chunk.js.map": "/discographiql/static/js/2.33d1b705.chunk.js.map",
+    "index.html": "/discographiql/index.html",
+    "precache-manifest.e327222364017dfe12cc1d7348dfa705.js": "/discographiql/precache-manifest.e327222364017dfe12cc1d7348dfa705.js",
+    "service-worker.js": "/discographiql/service-worker.js",
+    "static/css/main.69eda509.chunk.css.map": "/discographiql/static/css/main.69eda509.chunk.css.map",
+    "static/js/2.33d1b705.chunk.js.LICENSE.txt": "/discographiql/static/js/2.33d1b705.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9874f84f.js",
+    "static/js/2.33d1b705.chunk.js",
+    "static/css/main.69eda509.chunk.css",
+    "static/js/main.3d658526.chunk.js"
+  ]
+}
