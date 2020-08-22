@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b394286c06c0e0a82624b82ab2433c75",
+    "revision": "1d967a0b4461219ea30be38174f353ff",
     "url": "/discographiql/index.html"
   },
   {
-    "revision": "6e79ebc96f0057796284",
+    "revision": "337559ce538011a54309",
     "url": "/discographiql/static/css/main.5ecd60fb.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/discographiql/static/js/2.8387b4fe.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "6e79ebc96f0057796284",
-    "url": "/discographiql/static/js/main.dc4ca9d9.chunk.js"
+    "revision": "337559ce538011a54309",
+    "url": "/discographiql/static/js/main.41bd3c6c.chunk.js"
   },
   {
     "revision": "de4e96aac06dab6965e9",
