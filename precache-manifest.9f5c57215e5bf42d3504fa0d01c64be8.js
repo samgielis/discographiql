@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "503c7e883f0e0b4bb7a8fb9e5c08bdf1",
+    "revision": "a0f927a162be87186221e8caaf2440f0",
     "url": "/discographiql/index.html"
   },
   {
-    "revision": "23ad49b7fee6cabdbc2b",
-    "url": "/discographiql/static/css/main.69eda509.chunk.css"
+    "revision": "752b3b05dbc737090ede",
+    "url": "/discographiql/static/css/main.5ecd60fb.chunk.css"
   },
   {
     "revision": "5d591ebb024f44e4de84",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/discographiql/static/js/2.33d1b705.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "23ad49b7fee6cabdbc2b",
-    "url": "/discographiql/static/js/main.3d658526.chunk.js"
+    "revision": "752b3b05dbc737090ede",
+    "url": "/discographiql/static/js/main.3af20b6a.chunk.js"
   },
   {
     "revision": "de4e96aac06dab6965e9",
