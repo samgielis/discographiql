@@ -7,6 +7,7 @@ import {
   SimpleGrid,
   AspectRatioBox,
 } from "@chakra-ui/core";
+import { defaultResponsiveMargin } from "../DefaultTheme";
 
 const ARTISTS = gql`
   query Artists($partialName: String!) {
@@ -42,10 +43,7 @@ export function ArtistSearchOverview({ query }: ArtistSearchOverviewProps) {
   }
 
   return (
-    <SimpleGrid
-      columns={{ base: 2, sm: 3, lg: 5 }}
-      spacing={{ base: 2, sm: 3, md: 5 }}
-    >
+    <SimpleGrid columns={{ base: 2, sm: 3, lg: 5 }} spacing={defaultResponsiveMargin}>
       {data.queryArtists.map(({ id, name, image }: ArtistQueryResult) => (
         <div key={id}>
           <AspectRatioBox maxW="400px" ratio={1}>

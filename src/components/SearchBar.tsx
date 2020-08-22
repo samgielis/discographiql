@@ -1,5 +1,6 @@
 import React from "react";
 import { InputGroup, Input, FormControl } from "@chakra-ui/core";
+import { defaultResponsiveMargin } from "../DefaultTheme";
 
 interface SearchBarProps {
   onQueryEntered: (query: string) => any;
@@ -7,7 +8,7 @@ interface SearchBarProps {
 
 export function SearchBar({ onQueryEntered }: SearchBarProps) {
   return (
-    <FormControl>
+    <FormControl my={defaultResponsiveMargin}>
       <InputGroup size="lg">
         <Input
           type="text"
