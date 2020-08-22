@@ -9,6 +9,7 @@ import {
   FilterConfiguration,
   filterNodes,
 } from "../FilterUtils";
+import FilterToolBar from "./FilterToolBar";
 
 const ARTISTDISCOGRAPHY = gql`
   query ArtistPage($fullName: String!) {
@@ -43,20 +44,17 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
     DEFAULT_FILTER_CONFIG
   );
 
+  let queryVisualization = <Text>No search results.</Text>;
   if (loading) {
-    return <Spinner />;
-  }
-
-  if (error) {
-    return (
+    queryVisualization = <Spinner />;
+  } else if (error) {
+    queryVisualization = (
       <Text>
         Something went wrong fetching this artist's discography. Please try
         again later.
       </Text>
     );
-  }
-
-  if (data && data.queryArtists.length > 0) {
+  } else if (data && data.queryArtists.length > 0) {
     /* It's not possible to query the server for an artist by id directly.
       We need to query by name and then filter by id on the client side. */
     const artistWithDiscography = data.queryArtists.find((possibleMatch) => {
@@ -69,7 +67,7 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
         filterConfig
       );
 
-      return (
+      queryVisualization = (
         <SimpleGrid
           columns={{ base: 2, sm: 3, lg: 5 }}
           spacing={defaultResponsiveMargin}
@@ -88,5 +86,14 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
     }
   }
 
-  return <Text>No search results.</Text>;
+  return (
+    <Box>
+      <Heading>Discography</Heading>
+      <FilterToolBar
+        config={filterConfig}
+        onFilterConfigChanged={setFilterConfig}
+      />
+      {queryVisualization}
+    </Box>
+  );
 }
