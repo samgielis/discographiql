@@ -58,17 +58,34 @@ export function ArtistPage({ artist, onNavigateBack }: ArtistPageProps) {
       return (
         <Box>
           <Box>
-            <IconButton
-              aria-label="Back to search"
-              icon="arrow-back"
-              onClick={onNavigateBack}
-            />
+            <NavigateBackButton onNavigateBack={onNavigateBack} />
+            <ArtistProfile artist={augmentedArtist} />
           </Box>
-          <ArtistProfile artist={augmentedArtist} />
         </Box>
       );
     }
   }
 
   return <Text>No search results.</Text>;
+}
+
+function NavigateBackButton({
+  onNavigateBack,
+}: {
+  onNavigateBack: () => void;
+}) {
+  return (
+    <Box pos="absolute" zIndex={1}>
+      <IconButton
+        aria-label="Back to search"
+        icon="arrow-back"
+        onClick={onNavigateBack}
+        variant="ghost"
+        size="lg"
+        color="white"
+        _hover={{ bg: "transparent" }}
+        _active={{ bg: "transparent" }}
+      />
+    </Box>
+  );
 }
