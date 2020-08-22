@@ -1,4 +1,5 @@
 # DiscographiQL
+![CI/CD](https://github.com/samgielis/discographiql/workflows/CI/CD/badge.svg)
 
 DiscographiQL allows you to search for your favourite artists and browse their discography.
 
