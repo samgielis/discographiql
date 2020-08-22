@@ -41,7 +41,7 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
   if (error) {
     return (
       <Text>
-        Something went wrong fetching this artist's profile. Please try again
+        Something went wrong fetching this artist's discography. Please try again
         later.
       </Text>
     );
