@@ -15,9 +15,11 @@ const ARTISTS = gql`
 `;
 
 interface ArtistQueryResult {
-  id: string;
-  name: string;
-  image: string;
+  queryArtists: {
+    id: string;
+    name: string;
+    image: string;
+  }[];
 }
 
 interface ArtistSearchOverviewProps {
@@ -25,7 +27,7 @@ interface ArtistSearchOverviewProps {
 }
 
 export function ArtistSearchOverview({ query }: ArtistSearchOverviewProps) {
-  const { loading, error, data } = useQuery(ARTISTS, {
+  const { loading, error, data } = useQuery<ArtistQueryResult>(ARTISTS, {
     variables: { partialName: query },
   });
 
@@ -37,12 +39,16 @@ export function ArtistSearchOverview({ query }: ArtistSearchOverviewProps) {
     return <Text>Something went wrong. Please try again later.</Text>;
   }
 
+  if (!data || data.queryArtists.length === 0) {
+    return <Text>No search results.</Text>;
+  }
+
   return (
     <SimpleGrid
       columns={{ base: 2, sm: 3, lg: 5 }}
       spacing={defaultResponsiveMargin}
     >
-      {data.queryArtists.map(({ id, name, image }: ArtistQueryResult) => (
+      {data.queryArtists.map(({ id, name, image }) => (
         <Box key={id} textAlign="center">
           <ElegantImage src={image} alt={name} ratio={1} maxW="400px" />
           <Heading size="sm" m={defaultResponsiveMargin}>
