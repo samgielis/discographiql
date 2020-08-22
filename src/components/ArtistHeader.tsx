@@ -8,7 +8,7 @@ interface ArtistHeaderProps {
 
 export default function ArtistHeader({ artist }: ArtistHeaderProps) {
   return (
-    <Box w="100%" overflow="hidden" backgroundColor="gray.600" pos="relative">
+    <Box w="100%" overflow="hidden" backgroundColor="#2e2e2e" pos="relative">
       <Image
         src={artist.image}
         objectFit="cover"
