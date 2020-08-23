@@ -49,6 +49,7 @@ export function ArtistSearchOverview({
     <SimpleGrid
       columns={{ base: 2, sm: 3, lg: 5 }}
       spacing={defaultResponsiveMargin}
+      m={defaultResponsiveMargin}
     >
       {data.queryArtists.map((artist) => {
         const artistClickHandler = () => {

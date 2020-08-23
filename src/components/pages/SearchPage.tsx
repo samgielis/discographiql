@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Box, Heading } from "@chakra-ui/core";
-import { defaultResponsiveMargin } from "../../DefaultTheme";
+import { Box } from "@chakra-ui/core";
 import { SearchBar } from "../SearchBar";
 import { ArtistSearchOverview } from "../ArtistSearchOverview";
 import { Artist } from "../../DataModel";
+import { PageHeader } from "../PageHeader";
 
 interface SearchPageProps {
   showing: boolean;
@@ -18,9 +18,8 @@ export function SearchPage({ showing, onArtistSelected }: SearchPageProps) {
   };
 
   return (
-    <Box d={showing ? "block" : "none"} m={defaultResponsiveMargin}>
-      <Heading>DiscographiQL</Heading>
-      <SearchBar onQueryEntered={handleQueryEntered} />
+    <Box d={showing ? "block" : "none"}>
+      <SearcHeader handleQueryEntered={handleQueryEntered} />
       {!!query && (
         <ArtistSearchOverview
           query={query}
@@ -28,5 +27,21 @@ export function SearchPage({ showing, onArtistSelected }: SearchPageProps) {
         />
       )}
     </Box>
+  );
+}
+
+interface SearchHeaderProps {
+  handleQueryEntered: (query: string) => any;
+}
+
+function SearcHeader({ handleQueryEntered }: SearchHeaderProps) {
+  return (
+    <PageHeader
+      title="DiscographiQL"
+      imageSrc={process.env.PUBLIC_URL + "/header.png"}
+      color="green.400"
+    >
+      <SearchBar onQueryEntered={handleQueryEntered} />
+    </PageHeader>
   );
 }
