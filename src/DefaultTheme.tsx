@@ -11,6 +11,7 @@ export default {
       mediumlight: "#eaeaea",
       mediumdark: "#2e2e2e",
       dark: "black",
+      opaquedark: "#00000036",
     },
     ...theme.colors,
   },

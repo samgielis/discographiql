@@ -8,11 +8,14 @@ interface SearchBarProps {
 
 export function SearchBar({ onQueryEntered }: SearchBarProps) {
   return (
-    <FormControl my={defaultResponsiveMargin}>
+    <FormControl my={defaultResponsiveMargin} w="60%">
       <InputGroup size="lg">
         <Input
           type="text"
-          placeholder="Search"
+          placeholder="Find your favorite artist"
+          borderRadius={0}
+          color="brand.mediumlight"
+          bg="brand.opaquedark"
           onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
             if (event.key === "Enter") {
               onQueryEntered(event.currentTarget.value);

@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Image, Heading, PseudoBox } from "@chakra-ui/core";
+import { Stack, Image, Heading } from "@chakra-ui/core";
 
 interface PageHeaderProps {
   imageSrc: string;
@@ -34,6 +34,6 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
     <Heading as="h1" size="2xl" color={color} zIndex={1}>
       {title}
     </Heading>
-    <PseudoBox zIndex={1}>{children}</PseudoBox>
+    <>{children}</>
   </Stack>
 );
