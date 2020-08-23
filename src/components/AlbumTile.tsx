@@ -39,7 +39,7 @@ function SpotifyLogoOverlay() {
       top={0}
       bg="black"
       opacity={0}
-      _hover={{ opacity: 0.7 }}
+      _hover={{ opacity: 0.8 }}
       transition="opacity .3s"
     >
       <Box
