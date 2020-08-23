@@ -1,8 +1,8 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-import { Text, Spinner, SimpleGrid } from "@chakra-ui/core";
+import { SimpleGrid } from "@chakra-ui/core";
 import { defaultResponsiveMargin } from "../DefaultTheme";
-import { NamedNodeWithImage, Artist } from "../DataModel";
+import { NamedNodeWithImage, Artist, SearchState } from "../DataModel";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import { Tile } from "./AlbumTile";
 
@@ -23,49 +23,49 @@ interface ArtistQueryResult {
 interface ArtistSearchOverviewProps {
   query: string;
   onArtistSelected: (artist: Artist) => any;
+  onSearchStateChange: (state: SearchState) => any;
 }
 
 export function ArtistSearchOverview({
   query,
   onArtistSelected,
+  onSearchStateChange,
 }: ArtistSearchOverviewProps) {
   const { loading, error, data } = useQuery<ArtistQueryResult>(ARTISTS, {
     variables: { partialName: query },
   });
 
   if (loading) {
-    return <Spinner />;
+    onSearchStateChange("loading");
+  } else if (error) {
+    onSearchStateChange("error");
+  } else if (!data || data.queryArtists.length === 0) {
+    onSearchStateChange("no results");
+  } else {
+    onSearchStateChange("completed")
+    return (
+      <SimpleGrid
+        columns={{ base: 2, sm: 3, lg: 5 }}
+        spacing={defaultResponsiveMargin}
+        m={defaultResponsiveMargin}
+      >
+        {data.queryArtists.map((artist) => {
+          const artistClickHandler = () => {
+            onArtistSelected(artist);
+          };
+          return (
+            <React.Fragment key={artist.id}>
+              <Tile
+                node={artist}
+                maxW="400px"
+                icon={FaMicrophoneAlt}
+                onClick={artistClickHandler}
+              />
+            </React.Fragment>
+          );
+        })}
+      </SimpleGrid>
+    );
   }
-
-  if (error) {
-    return <Text>Something went wrong. Please try again later.</Text>;
-  }
-
-  if (!data || data.queryArtists.length === 0) {
-    return <Text>No search results.</Text>;
-  }
-
-  return (
-    <SimpleGrid
-      columns={{ base: 2, sm: 3, lg: 5 }}
-      spacing={defaultResponsiveMargin}
-      m={defaultResponsiveMargin}
-    >
-      {data.queryArtists.map((artist) => {
-        const artistClickHandler = () => {
-          onArtistSelected(artist);
-        };
-        return (
-          <React.Fragment key={artist.id}>
-            <Tile
-              node={artist}
-              maxW="400px"
-              icon={FaMicrophoneAlt}
-              onClick={artistClickHandler}
-            />
-          </React.Fragment>
-        );
-      })}
-    </SimpleGrid>
-  );
+  return <div />;
 }

@@ -15,3 +15,5 @@ export type Discography = Album[];
 export type ArtistWithDiscography<NodeType extends NamedNode> = NodeType & {
   albums: Discography;
 };
+
+export type SearchState = "idle" | "loading" | "no results" | "error" | "completed";
