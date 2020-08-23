@@ -1,27 +1,29 @@
 import React from "react";
-import { Album } from "../DataModel";
+import { NamedNodeWithImage } from "../DataModel";
 import { Box, Heading, BoxProps, Link, PseudoBox } from "@chakra-ui/core";
 import ElegantImage from "./ElegantImage";
 import { defaultResponsiveMargin } from "../DefaultTheme";
-import { FaSpotify } from "react-icons/fa";
+import { IconType } from "react-icons/lib";
 
-interface AlbumTileProps extends BoxProps {
-  album: Album;
+interface TileProps extends BoxProps {
+  node: NamedNodeWithImage;
+  icon: IconType;
+  iconColor?: string;
 }
 
-export function AlbumTile({ album, maxW }: AlbumTileProps) {
-  const { name, image } = album;
+export function Tile({
+  node,
+  icon,
+  onClick,
+  maxW,
+  iconColor = "white",
+}: TileProps) {
+  const { name, image } = node;
   return (
     <Box textAlign="center" maxW={maxW}>
-      <Box pos="relative">
-        <Link
-          href={`https://open.spotify.com/album/${album.id}`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <ElegantImage src={image} alt={name} ratio={1} />
-          <SpotifyLogoOverlay />
-        </Link>
+      <Box pos="relative" onClick={onClick} cursor="pointer">
+        <ElegantImage src={image} alt={name} ratio={1} />
+        <IconOverlay icon={icon} color={iconColor} />
       </Box>
       <Heading size="md" mx={0} my={defaultResponsiveMargin}>
         {name}
@@ -30,7 +32,12 @@ export function AlbumTile({ album, maxW }: AlbumTileProps) {
   );
 }
 
-function SpotifyLogoOverlay() {
+interface LogoOverlayProps {
+  icon: IconType;
+  color: string;
+}
+
+function IconOverlay({ icon, color }: LogoOverlayProps) {
   return (
     <PseudoBox
       w="100%"
@@ -38,17 +45,12 @@ function SpotifyLogoOverlay() {
       pos="absolute"
       top={0}
       bg="black"
+      color={color}
       opacity={0}
       _hover={{ opacity: 0.8 }}
       transition="opacity .3s"
     >
-      <Box
-        as={FaSpotify}
-        fontSize="4rem"
-        margin="auto"
-        color="green.400"
-        height="100%"
-      />
+      <Box as={icon} fontSize="4rem" margin="auto" height="100%" />
     </PseudoBox>
   );
 }

@@ -10,7 +10,8 @@ import {
   filterNodes,
 } from "../FilterUtils";
 import FilterToolBar from "./FilterToolBar";
-import { AlbumTile } from "./AlbumTile";
+import { Tile } from "./AlbumTile";
+import { FaSpotify } from "react-icons/fa";
 
 const ARTISTDISCOGRAPHY = gql`
   query ArtistPage($fullName: String!) {
@@ -75,7 +76,16 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
         >
           {filteredDiscography.map((album) => (
             <React.Fragment key={album.id}>
-              <AlbumTile album={album} maxW="400px" />
+              <Tile
+                node={album}
+                maxW="400px"
+                icon={FaSpotify}
+                iconColor="green.400"
+                onClick={() => {
+                  // TODO: Refactor this as soon as app is using ReactRouter properly
+                  window.open(`https://open.spotify.com/album/${album.id}`);
+                }}
+              />
             </React.Fragment>
           ))}
         </SimpleGrid>
