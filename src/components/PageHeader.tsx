@@ -2,7 +2,7 @@ import React from "react";
 import { Stack, Image, Heading } from "@chakra-ui/core";
 
 interface PageHeaderProps {
-  imageSrc: string;
+  imageSrc?: string;
   title: string;
   color?: string;
 }
