@@ -3,7 +3,6 @@ import { gql, useQuery } from "@apollo/client";
 import { NamedNode, ArtistWithDiscography, Artist } from "../DataModel";
 import { Spinner, Text, Box, SimpleGrid, Heading } from "@chakra-ui/core";
 import { defaultResponsiveMargin } from "../DefaultTheme";
-import ElegantImage from "./ElegantImage";
 import {
   DEFAULT_FILTER_CONFIG,
   FilterConfiguration,

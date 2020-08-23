@@ -1,6 +1,6 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-import { Text, Spinner, SimpleGrid, Box, Heading } from "@chakra-ui/core";
+import { Text, Spinner, SimpleGrid } from "@chakra-ui/core";
 import { defaultResponsiveMargin } from "../DefaultTheme";
 import { NamedNodeWithImage, Artist } from "../DataModel";
 import { FaMicrophoneAlt } from "react-icons/fa";

@@ -1,6 +1,6 @@
 import React from "react";
 import { NamedNodeWithImage } from "../DataModel";
-import { Box, Heading, BoxProps, Link, PseudoBox } from "@chakra-ui/core";
+import { Box, Heading, BoxProps, PseudoBox } from "@chakra-ui/core";
 import ElegantImage from "./ElegantImage";
 import { defaultResponsiveMargin } from "../DefaultTheme";
 import { IconType } from "react-icons/lib";
