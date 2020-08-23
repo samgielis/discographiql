@@ -14,6 +14,7 @@ export function SearchBar({ onQueryEntered }: SearchBarProps) {
           type="text"
           placeholder="Find your favorite artist"
           borderRadius={0}
+          borderColor="brand.opaquelight"
           color="brand.mediumlight"
           bg="brand.opaquedark"
           onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
