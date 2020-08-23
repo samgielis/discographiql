@@ -13,7 +13,7 @@ export default function ArtistHeader({ artist }: ArtistHeaderProps) {
   return (
     <PageHeader imageSrc={artist.image} title={artist.name}>
       <LinkButton
-        backgroundColor="green.400"
+        backgroundColor="brand.accent"
         href={`https://open.spotify.com/artist/${artist.id}`}
         target="_blank"
         rel="noreferrer"

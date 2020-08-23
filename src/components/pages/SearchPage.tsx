@@ -39,7 +39,7 @@ function SearcHeader({ handleQueryEntered }: SearchHeaderProps) {
     <PageHeader
       title="DiscographiQL"
       imageSrc={process.env.PUBLIC_URL + "/header.png"}
-      color="green.400"
+      color="brand.accent"
     >
       <SearchBar onQueryEntered={handleQueryEntered} />
     </PageHeader>

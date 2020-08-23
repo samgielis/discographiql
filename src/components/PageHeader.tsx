@@ -11,7 +11,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   imageSrc,
   title,
   children,
-  color = "white",
+  color = "brand.light",
 }) => (
   <Stack
     pos="relative"
@@ -20,7 +20,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
     h="30vh"
     spacing={3}
     overflow="hidden"
-    backgroundColor="#2e2e2e"
+    backgroundColor="brand.mediumdark"
   >
     <Image
       src={imageSrc}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core";
 import { Artist } from "./DataModel";
 import { SearchPage } from "./components/pages/SearchPage";
 import { ArtistPage } from "./components/pages/ArtistPage";
@@ -21,15 +21,20 @@ function App() {
     <ApolloProvider client={client}>
       <ThemeProvider theme={DefaultTheme}>
         <CSSReset />
-        <SearchPage onArtistSelected={handleArtistSelected} showing={!artist} />
-        {artist && (
-          <ArtistPage
-            artist={artist}
-            onNavigateBack={() => {
-              setArtist(undefined);
-            }}
+        <Box bg="brand.mediumlight" minH="100vh">
+          <SearchPage
+            onArtistSelected={handleArtistSelected}
+            showing={!artist}
           />
-        )}
+          {artist && (
+            <ArtistPage
+              artist={artist}
+              onNavigateBack={() => {
+                setArtist(undefined);
+              }}
+            />
+          )}
+        </Box>
       </ThemeProvider>
     </ApolloProvider>
   );

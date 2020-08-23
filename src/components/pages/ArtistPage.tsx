@@ -32,7 +32,7 @@ function NavigateBackButton({
         onClick={onNavigateBack}
         variant="ghost"
         size="lg"
-        color="white"
+        color="brand.light"
         _hover={{ bg: "transparent" }}
         _active={{ bg: "transparent" }}
       />
