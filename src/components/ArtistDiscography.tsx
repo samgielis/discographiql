@@ -3,13 +3,14 @@ import { gql, useQuery } from "@apollo/client";
 import { NamedNode, ArtistWithDiscography, Artist } from "../DataModel";
 import { Spinner, Text, Box, SimpleGrid, Heading } from "@chakra-ui/core";
 import { defaultResponsiveMargin } from "../DefaultTheme";
-import ElegantImage from "./ElegantImage";
 import {
   DEFAULT_FILTER_CONFIG,
   FilterConfiguration,
   filterNodes,
 } from "../FilterUtils";
 import FilterToolBar from "./FilterToolBar";
+import { Tile } from "./AlbumTile";
+import { FaSpotify } from "react-icons/fa";
 
 const ARTISTDISCOGRAPHY = gql`
   query ArtistPage($fullName: String!) {
@@ -72,13 +73,19 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
           columns={{ base: 2, sm: 3, lg: 5 }}
           spacing={defaultResponsiveMargin}
         >
-          {filteredDiscography.map(({ id, name, image }) => (
-            <Box key={id} textAlign="center">
-              <ElegantImage src={image} alt={name} ratio={1} maxW="400px" />
-              <Heading size="md" mx={0} my={defaultResponsiveMargin}>
-                {name}
-              </Heading>
-            </Box>
+          {filteredDiscography.map((album) => (
+            <React.Fragment key={album.id}>
+              <Tile
+                node={album}
+                maxW="400px"
+                icon={FaSpotify}
+                iconColor="green.400"
+                onClick={() => {
+                  // TODO: Refactor this as soon as app is using ReactRouter properly
+                  window.open(`https://open.spotify.com/album/${album.id}`);
+                }}
+              />
+            </React.Fragment>
           ))}
         </SimpleGrid>
       );

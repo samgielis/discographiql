@@ -1,9 +1,10 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-import { Text, Spinner, SimpleGrid, Box, Heading } from "@chakra-ui/core";
+import { Text, Spinner, SimpleGrid } from "@chakra-ui/core";
 import { defaultResponsiveMargin } from "../DefaultTheme";
-import ElegantImage from "./ElegantImage";
 import { NamedNodeWithImage, Artist } from "../DataModel";
+import { FaMicrophoneAlt } from "react-icons/fa";
+import { Tile } from "./AlbumTile";
 
 const ARTISTS = gql`
   query Artists($partialName: String!) {
@@ -54,22 +55,14 @@ export function ArtistSearchOverview({
           onArtistSelected(artist);
         };
         return (
-          <Box
-            key={artist.id}
-            textAlign="center"
-            onClick={artistClickHandler}
-            cursor="pointer"
-          >
-            <ElegantImage
-              src={artist.image}
-              alt={artist.name}
-              ratio={1}
+          <React.Fragment key={artist.id}>
+            <Tile
+              node={artist}
               maxW="400px"
+              icon={FaMicrophoneAlt}
+              onClick={artistClickHandler}
             />
-            <Heading size="sm" m={defaultResponsiveMargin}>
-              {artist.name}
-            </Heading>
-          </Box>
+          </React.Fragment>
         );
       })}
     </SimpleGrid>
