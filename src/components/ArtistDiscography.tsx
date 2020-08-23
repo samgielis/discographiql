@@ -10,6 +10,7 @@ import {
   filterNodes,
 } from "../FilterUtils";
 import FilterToolBar from "./FilterToolBar";
+import { AlbumTile } from "./AlbumTile";
 
 const ARTISTDISCOGRAPHY = gql`
   query ArtistPage($fullName: String!) {
@@ -72,13 +73,10 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
           columns={{ base: 2, sm: 3, lg: 5 }}
           spacing={defaultResponsiveMargin}
         >
-          {filteredDiscography.map(({ id, name, image }) => (
-            <Box key={id} textAlign="center" maxW="400px">
-              <ElegantImage src={image} alt={name} ratio={1} />
-              <Heading size="md" mx={0} my={defaultResponsiveMargin}>
-                {name}
-              </Heading>
-            </Box>
+          {filteredDiscography.map((album) => (
+            <React.Fragment key={album.id}>
+              <AlbumTile album={album} maxW="400px" />
+            </React.Fragment>
           ))}
         </SimpleGrid>
       );
