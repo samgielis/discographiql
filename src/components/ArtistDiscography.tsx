@@ -73,8 +73,8 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
           spacing={defaultResponsiveMargin}
         >
           {filteredDiscography.map(({ id, name, image }) => (
-            <Box key={id} textAlign="center">
-              <ElegantImage src={image} alt={name} ratio={1} maxW="400px" />
+            <Box key={id} textAlign="center" maxW="400px">
+              <ElegantImage src={image} alt={name} ratio={1} />
               <Heading size="md" mx={0} my={defaultResponsiveMargin}>
                 {name}
               </Heading>

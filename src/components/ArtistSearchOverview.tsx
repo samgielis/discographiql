@@ -59,13 +59,9 @@ export function ArtistSearchOverview({
             textAlign="center"
             onClick={artistClickHandler}
             cursor="pointer"
+            maxW="400px"
           >
-            <ElegantImage
-              src={artist.image}
-              alt={artist.name}
-              ratio={1}
-              maxW="400px"
-            />
+            <ElegantImage src={artist.image} alt={artist.name} ratio={1} />
             <Heading size="sm" m={defaultResponsiveMargin}>
               {artist.name}
             </Heading>
