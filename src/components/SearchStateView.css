@@ -1,0 +1,17 @@
+@keyframes translateUpAndDown {
+    from {
+        transform: translate(0, 0);
+      }
+    
+      50% {
+        transform: translate(0, -2rem);
+      }
+
+      to {
+        transform: translate(0, 0);
+      }
+  }
+
+  #animated-arrow {
+    animation: translateUpAndDown 2s ease-in-out infinite
+  }

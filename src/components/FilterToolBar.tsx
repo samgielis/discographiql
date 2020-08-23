@@ -11,11 +11,17 @@ export default function FilterToolBar({
   config,
   onFilterConfigChanged,
 }: FilterToolbarProps) {
+  const toolStyleProps = {
+    bg: "brand.mediumdark",
+    color: "white",
+    size: "sm" as "sm",
+    _hover: { color: "brand.light", bg: "brand.dark" },
+  };
+
   return (
     <ButtonGroup spacing={4}>
       <Button
-        variantColor="gray"
-        size="sm"
+        {...toolStyleProps}
         onClick={() =>
           onFilterConfigChanged({
             sortDescending: !config.sortDescending,
@@ -26,8 +32,7 @@ export default function FilterToolBar({
         {config.sortDescending ? "Sort ascending" : "Sort descending"}
       </Button>
       <Button
-        variantColor="gray"
-        size="sm"
+        {...toolStyleProps}
         onClick={() =>
           onFilterConfigChanged({
             sortDescending: config.sortDescending,

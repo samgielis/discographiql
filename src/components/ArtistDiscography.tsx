@@ -79,7 +79,7 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
                 node={album}
                 maxW="400px"
                 icon={FaSpotify}
-                iconColor="green.400"
+                iconColor="brand.accent"
                 onClick={() => {
                   // TODO: Refactor this as soon as app is using ReactRouter properly
                   window.open(`https://open.spotify.com/album/${album.id}`);

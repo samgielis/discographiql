@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Box, Heading } from "@chakra-ui/core";
-import { defaultResponsiveMargin } from "../../DefaultTheme";
+import { Box } from "@chakra-ui/core";
 import { SearchBar } from "../SearchBar";
 import { ArtistSearchOverview } from "../ArtistSearchOverview";
-import { Artist } from "../../DataModel";
+import { Artist, SearchState } from "../../DataModel";
+import { PageHeader } from "../PageHeader";
+import SearchStateView from "../SearchStateView";
 
 interface SearchPageProps {
   showing: boolean;
@@ -12,21 +13,38 @@ interface SearchPageProps {
 
 export function SearchPage({ showing, onArtistSelected }: SearchPageProps) {
   const [query, setQuery] = useState("");
+  const [searchState, setSearchState] = useState<SearchState>("idle");
   const handleQueryEntered = (query: string) => {
+    if (!query) {
+      setSearchState("idle");
+    }
     onArtistSelected(undefined);
     setQuery(query);
   };
 
   return (
-    <Box d={showing ? "block" : "none"} m={defaultResponsiveMargin}>
-      <Heading>DiscographiQL</Heading>
-      <SearchBar onQueryEntered={handleQueryEntered} />
+    <Box d={showing ? "block" : "none"}>
+      <SearcHeader handleQueryEntered={handleQueryEntered} />
       {!!query && (
         <ArtistSearchOverview
           query={query}
           onArtistSelected={onArtistSelected}
+          onSearchStateChange={setSearchState}
         />
       )}
+      <SearchStateView searchState={searchState} />
     </Box>
+  );
+}
+
+interface SearchHeaderProps {
+  handleQueryEntered: (query: string) => any;
+}
+
+function SearcHeader({ handleQueryEntered }: SearchHeaderProps) {
+  return (
+    <PageHeader title="DiscographiQL" color="brand.accent">
+      <SearchBar onQueryEntered={handleQueryEntered} />
+    </PageHeader>
   );
 }

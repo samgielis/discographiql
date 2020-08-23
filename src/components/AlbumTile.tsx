@@ -16,7 +16,7 @@ export function Tile({
   icon,
   onClick,
   maxW,
-  iconColor = "white",
+  iconColor = "brand.light",
 }: TileProps) {
   const { name, image } = node;
   return (
@@ -44,7 +44,7 @@ function IconOverlay({ icon, color }: LogoOverlayProps) {
       h="100%"
       pos="absolute"
       top={0}
-      bg="black"
+      bg="brand.dark"
       color={color}
       opacity={0}
       _hover={{ opacity: 0.8 }}
