@@ -3,7 +3,7 @@ import { SimpleGrid } from "@chakra-ui/core";
 import { defaultResponsiveMargin } from "../DefaultTheme";
 import { NamedNodeWithImage, Artist, QueryData } from "../DataModel";
 import { FaMicrophoneAlt } from "react-icons/fa";
-import { Tile } from "./AlbumTile";
+import { Tile } from "./Tile";
 
 interface ArtistSearchResultProps {
   data: QueryData<NamedNodeWithImage>;

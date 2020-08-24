@@ -14,7 +14,7 @@ import {
   filterNodes,
 } from "../FilterUtils";
 import FilterToolBar from "./FilterToolBar";
-import { Tile } from "./AlbumTile";
+import { Tile } from "./Tile";
 import { FaSpotify } from "react-icons/fa";
 import QueryResultWrapper, { NoDataFoundPlaceholder } from "./QueryResultWrapper";
 
