@@ -23,9 +23,6 @@ export default function QueryResultWrapper<DataNodeType extends NamedNode>({
   dataRenderer,
 }: QueryResultWrapperProps<DataNodeType>) {
   const { loading, error, data } = queryResult;
-  if (data && data.queryArtists.length > 0) {
-    return dataRenderer(data);
-  }
 
   if (loading) {
     return (
@@ -44,6 +41,10 @@ export default function QueryResultWrapper<DataNodeType extends NamedNode>({
         </Text>
       </SearchPlaceHolderWrapper>
     );
+  }
+
+  if (data && data.queryArtists.length > 0) {
+    return dataRenderer(data);
   }
 
   return (
