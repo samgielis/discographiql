@@ -51,16 +51,15 @@ function QueryWrapper({ query, onArtistSelected }: QueryWrapperProps) {
     variables: { partialName: query },
   });
 
+  const searchResultRenderer = (data: QueryData<NamedNodeWithImage>) => (
+    <ArtistSearchResult data={data} onArtistSelected={onArtistSelected} />
+  );
+
   return (
-    <>
-      {queryResult && queryResult.data && (
-        <ArtistSearchResult
-          data={queryResult.data}
-          onArtistSelected={onArtistSelected}
-        />
-      )}
-      <QueryResultWrapper queryResult={queryResult} />
-    </>
+    <QueryResultWrapper
+      queryResult={queryResult}
+      dataRenderer={searchResultRenderer}
+    />
   );
 }
 

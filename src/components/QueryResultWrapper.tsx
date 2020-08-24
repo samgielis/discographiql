@@ -9,16 +9,22 @@ import { QueryData, NamedNode } from "../DataModel";
 import "./QueryResultWrapper.css";
 import { QueryResult } from "@apollo/client/react";
 
+type DataRenderer<DataNodeType extends NamedNode> = (
+  data: QueryData<DataNodeType>
+) => JSX.Element;
+
 interface QueryResultWrapperProps<DataNodeType extends NamedNode> {
   queryResult: QueryResult<QueryData<DataNodeType>>;
+  dataRenderer: DataRenderer<DataNodeType>;
 }
 
 export default function QueryResultWrapper<DataNodeType extends NamedNode>({
   queryResult,
+  dataRenderer,
 }: QueryResultWrapperProps<DataNodeType>) {
   const { loading, error, data } = queryResult;
   if (data && data.queryArtists.length > 0) {
-    return <div />;
+    return dataRenderer(data);
   }
 
   if (loading) {
