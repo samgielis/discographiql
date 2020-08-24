@@ -6,7 +6,7 @@ import {
   Artist,
   QueryData,
 } from "../DataModel";
-import { Spinner, Text, Box, SimpleGrid, Heading } from "@chakra-ui/core";
+import { Box, SimpleGrid, Heading } from "@chakra-ui/core";
 import { defaultResponsiveMargin } from "../DefaultTheme";
 import {
   DEFAULT_FILTER_CONFIG,
@@ -16,6 +16,7 @@ import {
 import FilterToolBar from "./FilterToolBar";
 import { Tile } from "./AlbumTile";
 import { FaSpotify } from "react-icons/fa";
+import QueryResultWrapper from "./QueryResultWrapper";
 
 const ARTISTDISCOGRAPHY = gql`
   query ArtistPage($fullName: String!) {
@@ -35,62 +36,55 @@ interface ArtistDiscographyProps {
 }
 
 export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
-  const { loading, error, data } = useQuery<
-    QueryData<ArtistWithDiscography<NamedNode>>
-  >(ARTISTDISCOGRAPHY, {
-    variables: { fullName: artist.name },
-  });
+  const queryResult = useQuery<QueryData<ArtistWithDiscography<NamedNode>>>(
+    ARTISTDISCOGRAPHY,
+    {
+      variables: { fullName: artist.name },
+    }
+  );
 
   const [filterConfig, setFilterConfig] = useState<FilterConfiguration>(
     DEFAULT_FILTER_CONFIG
   );
 
-  let queryVisualization = <Text>No search results.</Text>;
-  if (loading) {
-    queryVisualization = <Spinner />;
-  } else if (error) {
-    queryVisualization = (
-      <Text>
-        Something went wrong fetching this artist's discography. Please try
-        again later.
-      </Text>
-    );
-  } else if (data && data.queryArtists.length > 0) {
-    /* It's not possible to query the server for an artist by id directly.
-      We need to query by name and then filter by id on the client side. */
+  const searchResultRenderer = (
+    data: QueryData<ArtistWithDiscography<NamedNode>>
+  ) => {
     const artistWithDiscography = data.queryArtists.find((possibleMatch) => {
       return possibleMatch.id === artist.id;
     });
 
-    if (artistWithDiscography) {
-      let filteredDiscography = filterNodes(
-        artistWithDiscography.albums,
-        filterConfig
-      );
-
-      queryVisualization = (
-        <SimpleGrid
-          columns={{ base: 2, sm: 3, lg: 5 }}
-          spacing={defaultResponsiveMargin}
-        >
-          {filteredDiscography.map((album) => (
-            <React.Fragment key={album.id}>
-              <Tile
-                node={album}
-                maxW="400px"
-                icon={FaSpotify}
-                iconColor="brand.accent"
-                onClick={() => {
-                  // TODO: Refactor this as soon as app is using ReactRouter properly
-                  window.open(`https://open.spotify.com/album/${album.id}`);
-                }}
-              />
-            </React.Fragment>
-          ))}
-        </SimpleGrid>
-      );
+    if (!artistWithDiscography) {
+      return <div />;
     }
-  }
+
+    let filteredDiscography = filterNodes(
+      artistWithDiscography.albums,
+      filterConfig
+    );
+
+    return (
+      <SimpleGrid
+        columns={{ base: 2, sm: 3, lg: 5 }}
+        spacing={defaultResponsiveMargin}
+      >
+        {filteredDiscography.map((album) => (
+          <React.Fragment key={album.id}>
+            <Tile
+              node={album}
+              maxW="400px"
+              icon={FaSpotify}
+              iconColor="brand.accent"
+              onClick={() => {
+                // TODO: Refactor this as soon as app is using ReactRouter properly
+                window.open(`https://open.spotify.com/album/${album.id}`);
+              }}
+            />
+          </React.Fragment>
+        ))}
+      </SimpleGrid>
+    );
+  };
 
   return (
     <Box textAlign="center" margin={defaultResponsiveMargin}>
@@ -101,7 +95,10 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
           onFilterConfigChanged={setFilterConfig}
         />
       </Box>
-      {queryVisualization}
+      <QueryResultWrapper
+        queryResult={queryResult}
+        dataRenderer={searchResultRenderer}
+      />
     </Box>
   );
 }
