@@ -47,15 +47,17 @@ export default function QueryResultWrapper<DataNodeType extends NamedNode>({
     return dataRenderer(data);
   }
 
-  return (
-    <SearchPlaceHolderWrapper>
-      <Box as={FaExclamationTriangle} fontSize="5rem"></Box>
-      <Text fontSize={{ base: "xl", lg: "2xl" }}>
-        We didn't find anything matching your search.
-      </Text>
-    </SearchPlaceHolderWrapper>
-  );
+  return <NoDataFoundPlaceholder />;
 }
+
+export const NoDataFoundPlaceholder = () => (
+  <SearchPlaceHolderWrapper>
+    <Box as={FaExclamationTriangle} fontSize="5rem"></Box>
+    <Text fontSize={{ base: "xl", lg: "2xl" }}>
+      We didn't find anything matching your search.
+    </Text>
+  </SearchPlaceHolderWrapper>
+);
 
 export const SearchPlaceholder = () => (
   <SearchPlaceHolderWrapper>

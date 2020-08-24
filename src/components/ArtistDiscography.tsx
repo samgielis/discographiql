@@ -16,7 +16,7 @@ import {
 import FilterToolBar from "./FilterToolBar";
 import { Tile } from "./AlbumTile";
 import { FaSpotify } from "react-icons/fa";
-import QueryResultWrapper from "./QueryResultWrapper";
+import QueryResultWrapper, { NoDataFoundPlaceholder } from "./QueryResultWrapper";
 
 const ARTISTDISCOGRAPHY = gql`
   query ArtistPage($fullName: String!) {
@@ -55,7 +55,7 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
     });
 
     if (!artistWithDiscography) {
-      return <div />;
+      return <NoDataFoundPlaceholder />;
     }
 
     let filteredDiscography = filterNodes(
