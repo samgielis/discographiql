@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box } from "@chakra-ui/core";
 import { SearchBar } from "../SearchBar";
-import { ArtistSearchOverview } from "../ArtistSearchOverview";
+import { ArtistSearchResult } from "../ArtistSearchResult";
 import { Artist, QueryData, NamedNodeWithImage } from "../../DataModel";
 import { PageHeader } from "../PageHeader";
 import QueryResultWrapper, { SearchPlaceholder } from "../QueryResultWrapper";
@@ -54,7 +54,7 @@ function QueryWrapper({ query, onArtistSelected }: QueryWrapperProps) {
   return (
     <>
       {queryResult && queryResult.data && (
-        <ArtistSearchOverview
+        <ArtistSearchResult
           data={queryResult.data}
           onArtistSelected={onArtistSelected}
         />

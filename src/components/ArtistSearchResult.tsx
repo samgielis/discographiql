@@ -5,15 +5,15 @@ import { NamedNodeWithImage, Artist, QueryData } from "../DataModel";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import { Tile } from "./AlbumTile";
 
-interface ArtistSearchOverviewProps {
+interface ArtistSearchResultProps {
   data: QueryData<NamedNodeWithImage>;
   onArtistSelected: (artist: Artist) => any;
 }
 
-export function ArtistSearchOverview({
+export function ArtistSearchResult({
   data,
   onArtistSelected,
-}: ArtistSearchOverviewProps) {
+}: ArtistSearchResultProps) {
   return (
     <SimpleGrid
       columns={{ base: 2, sm: 3, lg: 5 }}
