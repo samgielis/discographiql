@@ -6,13 +6,15 @@ import {
   FaSkullCrossbones,
 } from "react-icons/fa";
 import { SearchState } from "../DataModel";
-import "./SearchStateView.css";
+import "./QueryResultWrapper.css";
 
-interface SearchStateViewProps {
+interface QueryResultWrapperProps {
   searchState: SearchState;
 }
 
-export default function SearchStateView({ searchState }: SearchStateViewProps) {
+export default function QueryResultWrapper({
+  searchState,
+}: QueryResultWrapperProps) {
   if (searchState === "completed") {
     return <div />;
   }

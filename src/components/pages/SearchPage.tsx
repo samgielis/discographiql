@@ -4,7 +4,7 @@ import { SearchBar } from "../SearchBar";
 import { ArtistSearchOverview } from "../ArtistSearchOverview";
 import { Artist, SearchState } from "../../DataModel";
 import { PageHeader } from "../PageHeader";
-import SearchStateView from "../SearchStateView";
+import QueryResultWrapper from "../QueryResultWrapper";
 
 interface SearchPageProps {
   showing: boolean;
@@ -32,7 +32,7 @@ export function SearchPage({ showing, onArtistSelected }: SearchPageProps) {
           onSearchStateChange={setSearchState}
         />
       )}
-      <SearchStateView searchState={searchState} />
+      <QueryResultWrapper searchState={searchState} />
     </Box>
   );
 }
