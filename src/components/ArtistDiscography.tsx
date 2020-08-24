@@ -6,7 +6,7 @@ import {
   Artist,
   QueryData,
 } from "../DataModel";
-import { Box, SimpleGrid, Heading } from "@chakra-ui/core";
+import { Box, Heading } from "@chakra-ui/core";
 import { defaultResponsiveMargin } from "../DefaultTheme";
 import {
   DEFAULT_FILTER_CONFIG,
@@ -16,7 +16,10 @@ import {
 import FilterToolBar from "./FilterToolBar";
 import { Tile } from "./Tile";
 import { FaSpotify } from "react-icons/fa";
-import QueryResultWrapper, { NoDataFoundPlaceholder } from "./QueryResultWrapper";
+import QueryResultWrapper, {
+  NoDataFoundPlaceholder,
+} from "./QueryResultWrapper";
+import TileGrid from "./TileGrid";
 
 const ARTISTDISCOGRAPHY = gql`
   query ArtistPage($fullName: String!) {
@@ -64,10 +67,7 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
     );
 
     return (
-      <SimpleGrid
-        columns={{ base: 2, sm: 3, lg: 5 }}
-        spacing={defaultResponsiveMargin}
-      >
+      <TileGrid>
         {filteredDiscography.map((album) => (
           <React.Fragment key={album.id}>
             <Tile
@@ -82,7 +82,7 @@ export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
             />
           </React.Fragment>
         ))}
-      </SimpleGrid>
+      </TileGrid>
     );
   };
 

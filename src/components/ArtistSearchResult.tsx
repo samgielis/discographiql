@@ -1,9 +1,8 @@
 import React from "react";
-import { SimpleGrid } from "@chakra-ui/core";
-import { defaultResponsiveMargin } from "../DefaultTheme";
 import { NamedNodeWithImage, Artist, QueryData } from "../DataModel";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import { Tile } from "./Tile";
+import TileGrid from "./TileGrid";
 
 interface ArtistSearchResultProps {
   data: QueryData<NamedNodeWithImage>;
@@ -15,11 +14,7 @@ export function ArtistSearchResult({
   onArtistSelected,
 }: ArtistSearchResultProps) {
   return (
-    <SimpleGrid
-      columns={{ base: 2, sm: 3, lg: 5 }}
-      spacing={defaultResponsiveMargin}
-      m={defaultResponsiveMargin}
-    >
+    <TileGrid>
       {data.queryArtists.map((artist) => {
         const artistClickHandler = () => {
           onArtistSelected(artist);
@@ -35,6 +30,6 @@ export function ArtistSearchResult({
           </React.Fragment>
         );
       })}
-    </SimpleGrid>
+    </TileGrid>
   );
 }
