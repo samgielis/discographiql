@@ -2,7 +2,7 @@ import React from "react";
 import { gql, useQuery } from "@apollo/client";
 import { SimpleGrid } from "@chakra-ui/core";
 import { defaultResponsiveMargin } from "../DefaultTheme";
-import { NamedNodeWithImage, Artist, SearchState } from "../DataModel";
+import { NamedNodeWithImage, Artist, SearchState, QueryData } from "../DataModel";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import { Tile } from "./AlbumTile";
 
@@ -16,10 +16,6 @@ const ARTISTS = gql`
   }
 `;
 
-interface ArtistQueryResult {
-  queryArtists: NamedNodeWithImage[];
-}
-
 interface ArtistSearchOverviewProps {
   query: string;
   onArtistSelected: (artist: Artist) => any;
@@ -31,7 +27,7 @@ export function ArtistSearchOverview({
   onArtistSelected,
   onSearchStateChange,
 }: ArtistSearchOverviewProps) {
-  const { loading, error, data } = useQuery<ArtistQueryResult>(ARTISTS, {
+  const { loading, error, data } = useQuery<QueryData<NamedNodeWithImage>>(ARTISTS, {
     variables: { partialName: query },
   });
 

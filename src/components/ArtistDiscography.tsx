@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
-import { NamedNode, ArtistWithDiscography, Artist } from "../DataModel";
+import {
+  NamedNode,
+  ArtistWithDiscography,
+  Artist,
+  QueryData,
+} from "../DataModel";
 import { Spinner, Text, Box, SimpleGrid, Heading } from "@chakra-ui/core";
 import { defaultResponsiveMargin } from "../DefaultTheme";
 import {
@@ -25,21 +30,16 @@ const ARTISTDISCOGRAPHY = gql`
   }
 `;
 
-interface ArtistDiscographyQueryResults {
-  queryArtists: ArtistWithDiscography<NamedNode>[];
-}
-
 interface ArtistDiscographyProps {
   artist: Artist;
 }
 
 export default function ArtistDiscography({ artist }: ArtistDiscographyProps) {
-  const { loading, error, data } = useQuery<ArtistDiscographyQueryResults>(
-    ARTISTDISCOGRAPHY,
-    {
-      variables: { fullName: artist.name },
-    }
-  );
+  const { loading, error, data } = useQuery<
+    QueryData<ArtistWithDiscography<NamedNode>>
+  >(ARTISTDISCOGRAPHY, {
+    variables: { fullName: artist.name },
+  });
 
   const [filterConfig, setFilterConfig] = useState<FilterConfiguration>(
     DEFAULT_FILTER_CONFIG
