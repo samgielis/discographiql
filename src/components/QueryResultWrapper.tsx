@@ -5,57 +5,64 @@ import {
   FaExclamationTriangle,
   FaSkullCrossbones,
 } from "react-icons/fa";
-import { SearchState } from "../DataModel";
+import { QueryData, NamedNode } from "../DataModel";
 import "./QueryResultWrapper.css";
+import { QueryResult } from "@apollo/client/react";
 
-interface QueryResultWrapperProps {
-  searchState: SearchState;
+interface QueryResultWrapperProps<DataNodeType extends NamedNode> {
+  queryResult: QueryResult<QueryData<DataNodeType>>;
 }
 
-export default function QueryResultWrapper({
-  searchState,
-}: QueryResultWrapperProps) {
-  if (searchState === "completed") {
+export default function QueryResultWrapper<DataNodeType extends NamedNode>({
+  queryResult,
+}: QueryResultWrapperProps<DataNodeType>) {
+  const { loading, error, data } = queryResult;
+  if (data && data.queryArtists.length > 0) {
     return <div />;
   }
 
-  let content = (
-    <>
-      <Box as={FaArrowUp} id="animated-arrow" fontSize="5rem"></Box>
-      <Text fontSize={{ base: "xl", lg: "2xl" }}>
-        There's nothing here yet.
-        <br /> <br /> Browse your favourite artists,
-        <br />
-        check their discography
-        <br />
-        and listen on Spotify.
-      </Text>
-    </>
-  );
+  if (loading) {
+    return (
+      <SearchPlaceHolderWrapper>
+        <Spinner size="xl" />;
+      </SearchPlaceHolderWrapper>
+    );
+  }
 
-  if (searchState === "loading") {
-    content = <Spinner size="xl" />;
-  } else if (searchState === "error") {
-    content = (
-      <>
+  if (error) {
+    return (
+      <SearchPlaceHolderWrapper>
         <Box as={FaSkullCrossbones} fontSize="5rem"></Box>
         <Text fontSize={{ base: "xl", lg: "2xl" }}>
           Something's wrong with your query.
         </Text>
-      </>
-    );
-  } else if (searchState === "no results") {
-    content = (
-      <>
-        <Box as={FaExclamationTriangle} fontSize="5rem"></Box>
-        <Text fontSize={{ base: "xl", lg: "2xl" }}>
-          We didn't find anything matching your search.
-        </Text>
-      </>
+      </SearchPlaceHolderWrapper>
     );
   }
-  return <SearchPlaceHolderWrapper>{content}</SearchPlaceHolderWrapper>;
+
+  return (
+    <SearchPlaceHolderWrapper>
+      <Box as={FaExclamationTriangle} fontSize="5rem"></Box>
+      <Text fontSize={{ base: "xl", lg: "2xl" }}>
+        We didn't find anything matching your search.
+      </Text>
+    </SearchPlaceHolderWrapper>
+  );
 }
+
+export const SearchPlaceholder = () => (
+  <SearchPlaceHolderWrapper>
+    <Box as={FaArrowUp} id="animated-arrow" fontSize="5rem"></Box>
+    <Text fontSize={{ base: "xl", lg: "2xl" }}>
+      There's nothing here yet.
+      <br /> <br /> Browse your favourite artists,
+      <br />
+      check their discography
+      <br />
+      and listen on Spotify.
+    </Text>
+  </SearchPlaceHolderWrapper>
+);
 
 const SearchPlaceHolderWrapper: React.FC<{}> = ({ children }) => (
   <Stack

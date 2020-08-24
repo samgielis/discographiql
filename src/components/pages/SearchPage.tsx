@@ -2,9 +2,20 @@ import React, { useState } from "react";
 import { Box } from "@chakra-ui/core";
 import { SearchBar } from "../SearchBar";
 import { ArtistSearchOverview } from "../ArtistSearchOverview";
-import { Artist, SearchState } from "../../DataModel";
+import { Artist, QueryData, NamedNodeWithImage } from "../../DataModel";
 import { PageHeader } from "../PageHeader";
-import QueryResultWrapper from "../QueryResultWrapper";
+import QueryResultWrapper, { SearchPlaceholder } from "../QueryResultWrapper";
+import { gql, useQuery } from "@apollo/client";
+
+const ARTISTS = gql`
+  query Artists($partialName: String!) {
+    queryArtists(byName: $partialName) {
+      id
+      name
+      image
+    }
+  }
+`;
 
 interface SearchPageProps {
   showing: boolean;
@@ -13,11 +24,7 @@ interface SearchPageProps {
 
 export function SearchPage({ showing, onArtistSelected }: SearchPageProps) {
   const [query, setQuery] = useState("");
-  const [searchState, setSearchState] = useState<SearchState>("idle");
   const handleQueryEntered = (query: string) => {
-    if (!query) {
-      setSearchState("idle");
-    }
     onArtistSelected(undefined);
     setQuery(query);
   };
@@ -25,15 +32,35 @@ export function SearchPage({ showing, onArtistSelected }: SearchPageProps) {
   return (
     <Box d={showing ? "block" : "none"}>
       <SearcHeader handleQueryEntered={handleQueryEntered} />
-      {!!query && (
+      {!!query ? (
+        <QueryWrapper query={query} onArtistSelected={onArtistSelected} />
+      ) : (
+        <SearchPlaceholder />
+      )}
+    </Box>
+  );
+}
+
+interface QueryWrapperProps {
+  query: string;
+  onArtistSelected: (artist: Artist | undefined) => any;
+}
+
+function QueryWrapper({ query, onArtistSelected }: QueryWrapperProps) {
+  const queryResult = useQuery<QueryData<NamedNodeWithImage>>(ARTISTS, {
+    variables: { partialName: query },
+  });
+
+  return (
+    <>
+      {queryResult && queryResult.data && (
         <ArtistSearchOverview
-          query={query}
+          data={queryResult.data}
           onArtistSelected={onArtistSelected}
-          onSearchStateChange={setSearchState}
         />
       )}
-      <QueryResultWrapper searchState={searchState} />
-    </Box>
+      <QueryResultWrapper queryResult={queryResult} />
+    </>
   );
 }
 
